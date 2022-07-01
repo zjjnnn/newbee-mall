@@ -8,16 +8,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
 
-import ltd.newbee.mall.newbeemall.service.UserHistoryService;
+import ltd.newbee.mall.newbeemall.service.CategoryService;
+
 @Controller
-public class UserHistoryController {
+public class CategoryController {
 	
 	@Resource
-	private UserHistoryService egUserHistory;
+	private CategoryService egCategory;
 	
-	@GetMapping("/UserHistory")
+	@GetMapping("/category")
 	@ResponseBody
-	public Result getgoodsDetail(int userId) {
-		return ResultGenerator.genSuccessResult(egUserHistory.findUserHistoryBySkuId(userId));
+	public Result getgoodsDetail(Integer categoryById) {
+		return ResultGenerator.genSuccessResult(egCategory.findCategoryById(categoryById));
+
 	}
 }

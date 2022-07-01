@@ -4,6 +4,15 @@ import java.io.Serializable;
 
 public class GoodsSpecificationsAndSizeVO implements Serializable {
 	private Long goodsId;
+	private String color;
+
+	private String size;
+
+	private String material;
+
+	private String warranty;
+
+	private String wrapSize;
 
 	public Long getGoodsId() {
 		return goodsId;
@@ -53,13 +62,4 @@ public class GoodsSpecificationsAndSizeVO implements Serializable {
 		this.wrapSize = wrapSize;
 	}
 
-	private String color;
-	
-	private String size;
-	
-	private String material;
-	
-	private String warranty;
-	
-	private String wrapSize;
 }

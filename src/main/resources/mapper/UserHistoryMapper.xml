@@ -4,15 +4,12 @@
 <mapper
 	namespace="ltd.newbee.mall.newbeemall.dao.UserHistoryMapper">
 	<select id="selectGoodsDetail"
-		resultType="ltd.newbee.mall.newbeemall.entity.NewSku">
+		resultType="ltd.newbee.mall.newbeemall.entity.Sku">
 		SELECT *
 		FROM rescent_saw_goods AS saw
-			JOIN new_sku AS sku
-			ON saw.sku_id = sku.sku_id
-		WHERE user_id=(
-			SELECT user_id
-			FROM tb_newbee_mall_user
-			WHERE user_id = #{user_id}
-		);
+		JOIN sku
+		ON saw.sku_id = sku.sku_id
+		AND user_id in (select #{user_id} from tb_newbee_mall_user);
+
 	</select>
 </mapper>

@@ -4,11 +4,11 @@
 <mapper
 	namespace="ltd.newbee.mall.newbeemall.dao.ECGoodsDetailMapper">
 	<select id="selectGoodsDetail"
-		resultType="ltd.newbee.mall.newbeemall.entity.NewSku">
+		resultType="ltd.newbee.mall.newbeemall.entity.Sku">
 		SELECT *
 		FROM config
-		JOIN new_sku
-		ON new_sku.sku_id = config.sku_id
+		JOIN sku
+		ON sku.sku_id = config.sku_id
 		WHERE config.config_type=#{configType}
 	</select>
 </mapper>

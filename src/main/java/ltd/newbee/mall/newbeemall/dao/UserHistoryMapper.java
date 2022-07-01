@@ -2,8 +2,8 @@ package ltd.newbee.mall.newbeemall.dao;
 
 import java.util.List;
 
-import ltd.newbee.mall.newbeemall.entity.NewSku;
+import ltd.newbee.mall.newbeemall.entity.Sku;
 
 public interface UserHistoryMapper {
-	List<NewSku> selectGoodsDetail(int userId);
+	List<Sku> selectGoodsDetail(int userId);
 }
