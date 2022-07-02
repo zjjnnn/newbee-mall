@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import ltd.newbee.mall.newbeemall.dao.ECGoodsDetailMapper;
-import ltd.newbee.mall.newbeemall.entity.Sku;
+import ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.newbeemall.service.ECGoodsDetailService;
 
 @Service
@@ -17,8 +17,8 @@ public class ECGoodsDetailServiceImpl implements ECGoodsDetailService {
 	ECGoodsDetailMapper eCGoodsDetailMapper;
 
 	@Override
-	public List<Sku> findGoodsDetailsByGoodsId(int configType) {
-		List<Sku> list = eCGoodsDetailMapper.selectGoodsDetail(configType);
+	public List<NewBeeMallGoods> findGoodsDetailsByGoodsId(int configType) {
+		List<NewBeeMallGoods> list = eCGoodsDetailMapper.selectGoodsDetail(configType);
 		return list;
 	}
 }
