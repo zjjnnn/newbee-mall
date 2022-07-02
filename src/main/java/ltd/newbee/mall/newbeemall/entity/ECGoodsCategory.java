@@ -9,7 +9,9 @@ public class ECGoodsCategory implements Serializable {
 	private Integer categoryId;
 
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T10:29:33.7169901+09:00", comments = "Source field: ec_goods_category.name")
-	private String name;
+	private String categoryName;
+
+	private String img;
 
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T10:29:33.7179901+09:00", comments = "Source field: ec_goods_category.parent_id")
 	private Integer parentId;
@@ -28,13 +30,21 @@ public class ECGoodsCategory implements Serializable {
 	}
 
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T10:29:33.7179901+09:00", comments = "Source field: ec_goods_category.name")
-	public String getName() {
-		return name;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T10:29:33.7179901+09:00", comments = "Source field: ec_goods_category.name")
-	public void setName(String name) {
-		this.name = name == null ? null : name.trim();
+	public void setCategoryName(String name) {
+		this.categoryName = name == null ? null : name.trim();
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T10:29:33.7179901+09:00", comments = "Source field: ec_goods_category.parent_id")

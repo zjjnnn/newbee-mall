@@ -17,39 +17,46 @@ import ltd.newbee.mall.newbeemall.util.ResultGenerator;
 
 @Controller
 public class TestController {
-	
-	//方法1    Postman: GET + Params
+
+	// 方法1 Postman: GET + Params
 	@Resource
 	private GoodsDetailService goodsDetailService;
-	
+
 	@GetMapping("/goods/detail")
-    @ResponseBody
-    public Result getgoodsDetail(long goodsId) {
-        return ResultGenerator.genSuccessResult(goodsDetailService.findGoodsDetailsByGoodsId(goodsId));
-    }
-	
-	//方法2  Postman:POST
+	@ResponseBody
+	public Result getgoodsDetail(long goodsId) {
+		return ResultGenerator.genSuccessResult(goodsDetailService.findGoodsDetailsByGoodsId(goodsId));
+	}
+
+	// 方法2 Postman:POST
 	/**
-	 * restful风格的参数请求
-	 * http://localhost:8080/goods/detail/review/222222
+	 * restful风格的参数请求 http://localhost:8080/goods/detail/review/222222
+	 * 
 	 * @param id
 	 */
-	
+
 	@RequestMapping(value = "/goods/detail/review/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public Result queryProduct(@PathVariable("id") String id) {
-	// ...业务处理
-	return ResultGenerator.genSuccessResult(id);
+		// ...业务处理
+		return ResultGenerator.genSuccessResult(id);
 	}
-	
-	//方法3  Postman:DELETE   Body-form-data
+
+	// 方法3 Postman:DELETE Body-form-data
 	@DeleteMapping("/goods/detail/review")
 	@ResponseBody
 	public Result review(@RequestParam(value = "reviewId", required = true) long reviewId) {
-	System.out.println(reviewId);
-	return ResultGenerator.genSuccessResult(reviewId);
+		System.out.println(reviewId);
+		return ResultGenerator.genSuccessResult(reviewId);
 	}
 
-	
+	// debug用
+	@RequestMapping(value = "/test/test/{category}", method = RequestMethod.GET)
+	@ResponseBody
+	public Result queryProduct(@PathVariable("category") String categoryName, String orderBy) {
+		// ...业务处理
+		System.out.println(orderBy);
+		return ResultGenerator.genSuccessResult(categoryName);
+	}
 
 }

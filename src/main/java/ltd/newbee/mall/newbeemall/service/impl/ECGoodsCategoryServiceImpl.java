@@ -19,14 +19,14 @@ public class ECGoodsCategoryServiceImpl implements ECGoodsCategoryService {
 	@Resource
 	ECGoodsCategoryMapper ecGoodsCategoryMapper;
 
-	@Override
+	@Override // 取出整个表
 	public List<ECGoodsCategoryListVO> getList() {
 		List<ECGoodsCategory> ecGoodsCategories = ecGoodsCategoryMapper.selectGoodsCategory();
 		List<ECGoodsCategoryListVO> subLists = new ArrayList<>();
 		for (ECGoodsCategory ec : ecGoodsCategories) {
 			if (ec.getParentId() == 0) {
 				ECGoodsCategoryListVO subList = new ECGoodsCategoryListVO();
-				// get ec1的属性添加到sublist
+				// ec的getter setter 添加到sublist
 				BeanUtils.copyProperties(ec, subList);
 				subList.setSubList(getSubList(ecGoodsCategories, subList));
 				subLists.add(subList);
@@ -35,6 +35,7 @@ public class ECGoodsCategoryServiceImpl implements ECGoodsCategoryService {
 		return subLists;
 	}
 
+	// 创建子表
 	public List<ECGoodsCategoryListVO> getSubList(List<ECGoodsCategory> ecGoodsCategories,
 			ECGoodsCategoryListVO ecGoodsCategoryListVO) {
 		List<ECGoodsCategoryListVO> subLists = new ArrayList<>();

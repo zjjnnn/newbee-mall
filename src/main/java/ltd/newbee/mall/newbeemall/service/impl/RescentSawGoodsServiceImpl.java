@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import ltd.newbee.mall.newbeemall.dao.RescentSawGoodsMapper;
-import ltd.newbee.mall.newbeemall.entity.Sku;
+import ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.newbeemall.service.RescentSawGoodsService;
 
 @Service
@@ -17,8 +17,8 @@ public class RescentSawGoodsServiceImpl implements RescentSawGoodsService {
 	RescentSawGoodsMapper rescentSawGoodsMapper;
 
 	@Override
-	public List<Sku> findRescentSawGoodsBySkuId(long userId) {
-		List<Sku> list = rescentSawGoodsMapper.selectGoodsDetail(userId);
+	public List<NewBeeMallGoods> findRescentSawGoodsBySkuId(long userId) {
+		List<NewBeeMallGoods> list = rescentSawGoodsMapper.selectGoodsDetail(userId);
 		return list;
 	}
 

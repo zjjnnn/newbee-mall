@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.ItemListsMapper">
+	<select id="getItemListsByCategoryId"
+		resultType="ltd.newbee.mall.newbeemall.entity.Sku">
+		SELECT c.category_name,sku.* 
+		FROM sku 
+		join ec_goods_category as c
+		on sku.category_id=c.category_id
+		where c.category_id=#{categoryId};
+	</select>
+</mapper>

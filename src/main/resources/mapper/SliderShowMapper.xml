@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.SliderShowMapper">
+	<select id="selectItemOrderByImgOrder"
+		resultType="ltd.newbee.mall.newbeemall.entity.SliderShow">
+		SELECT * 
+		FROM newbee_mall_db.slider_show
+		order by img_order;
+	</select>
+</mapper>

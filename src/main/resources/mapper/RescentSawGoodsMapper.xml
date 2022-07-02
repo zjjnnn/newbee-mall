@@ -3,11 +3,11 @@
 <mapper
 	namespace="ltd.newbee.mall.newbeemall.dao.RescentSawGoodsMapper">
 	<select id="selectGoodsDetail"
-		resultType="ltd.newbee.mall.newbeemall.entity.Sku">
-		SELECT r.user_id,sku.* 
+		resultType="ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods">
+		SELECT r.user_id,t.* 
 		FROM rescent_saw_goods as r 
-		join sku
-		on sku.sku_id=r.sku_id 
+		join tb_newbee_mall_goods_info as t
+		on t.goods_id=r.goods_id 
 		where r.user_id=#{userid};
 	</select>
 </mapper>
