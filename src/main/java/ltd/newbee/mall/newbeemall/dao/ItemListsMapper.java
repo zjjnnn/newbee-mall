@@ -2,8 +2,8 @@ package ltd.newbee.mall.newbeemall.dao;
 
 import java.util.List;
 
-import ltd.newbee.mall.newbeemall.entity.Sku;
+import ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods;
 
 public interface ItemListsMapper {
-	List<Sku> getItemListsByCategoryId(int categoryId);
+	List<NewBeeMallGoods> getItemListsByCategoryId(int categoryId);
 }

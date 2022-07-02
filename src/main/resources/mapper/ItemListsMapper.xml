@@ -3,11 +3,11 @@
 <mapper
 	namespace="ltd.newbee.mall.newbeemall.dao.ItemListsMapper">
 	<select id="getItemListsByCategoryId"
-		resultType="ltd.newbee.mall.newbeemall.entity.Sku">
-		SELECT c.category_name,sku.* 
-		FROM sku 
+		resultType="ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods">
+		SELECT c.category_name,t.* 
+		FROM tb_newbee_mall_goods_info as t 
 		join ec_goods_category as c
-		on sku.category_id=c.category_id
+		on t.goods_category_id=c.category_id
 		where c.category_id=#{categoryId};
 	</select>
 </mapper>
