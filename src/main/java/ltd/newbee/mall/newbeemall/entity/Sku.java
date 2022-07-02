@@ -8,6 +8,9 @@ public class Sku {
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-06-30T17:18:17.787847+09:00", comments="Source field: sku.goods_id")
     private Long goodsId;
+    
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-06-30T17:18:17.787847+09:00", comments="Source field: category.category_id")
+    private Long categoryId;
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-06-30T17:18:17.787937+09:00", comments="Source field: sku.sku1")
     private String sku1;
@@ -178,6 +181,15 @@ public class Sku {
         this.skuId = skuId;
     }
 
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-06-30T17:18:17.787878+09:00", comments="Source field: sku.goods_id")
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-06-30T17:18:17.787909+09:00", comments="Source field: sku.goods_id")
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-06-30T17:18:17.787878+09:00", comments="Source field: sku.goods_id")
     public Long getGoodsId() {
         return goodsId;

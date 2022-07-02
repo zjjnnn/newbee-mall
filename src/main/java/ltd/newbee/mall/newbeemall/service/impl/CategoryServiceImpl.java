@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
 		//所有内容进行遍历
 		for (Category entity : entityList) {
 			//找出一级分类，赋值到vo类，加入到集合中去
-			if (entity.getParent() == null) {
+			if (entity.getCategoryParent() == null) {
 				CategoryListVo vo = new CategoryListVo();
 				//BeanUtils.copyProperties(A,B)方法是将A中的值赋给B
 				BeanUtils.copyProperties(entity,vo);
@@ -51,7 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
 	    //依旧将所有内容进行遍历
 	    for (Category entity : entityList) {
 	    	//取出相应子类，加到集合中并返回
-	    	if (root.getId().equals(entity.getParent())) {
+	    	if (root.getCategoryId().equals(entity.getCategoryParent())) {
 				CategoryListVo vo = new CategoryListVo();
 				BeanUtils.copyProperties(entity,vo);
 				//使用递归，循序渐进式设置完各大小级分类
