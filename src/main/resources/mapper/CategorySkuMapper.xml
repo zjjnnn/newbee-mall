@@ -8,6 +8,15 @@
 		SELECT
 		goods_id,goods_name,goods_category_id,goods_cover_img,selling_price,create_time
 		FROM tb_newbee_mall_goods_info
-		ORDER BY ${orderBy};
+		
+		<!-- ORDER BY ${orderBy}; -->
+
+		<if test="ascOrDesc == 'desc'">
+			ORDER BY ${orderBy} DESC
+		</if>
+		<if test="ascOrDesc == 'asc'">
+			ORDER BY ${orderBy} ASC
+		</if>
+		
 	</select>
 </mapper>

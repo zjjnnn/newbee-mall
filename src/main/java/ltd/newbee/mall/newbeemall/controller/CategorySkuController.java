@@ -30,8 +30,8 @@ public class CategorySkuController {
 	//带参数
 	@RequestMapping(value = "/CategorySku/{goods_category_id}", method = RequestMethod.GET)
 	@ResponseBody
-	public Result queryProduct(@PathVariable("goods_category_id") Long goodsCategoryId, String orderBy) {
-		return ResultGenerator.genSuccessResult(egCategorySku.findCategorySkuById(goodsCategoryId,orderBy));
+	public Result queryProduct(@PathVariable("goods_category_id") Long goodsCategoryId, String orderBy, String ascOrDesc) {
+		return ResultGenerator.genSuccessResult(egCategorySku.findCategorySkuById(goodsCategoryId,orderBy,ascOrDesc));
 	}
 	
 	//不带参数默认传所有的

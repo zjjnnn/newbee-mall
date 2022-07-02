@@ -23,9 +23,9 @@ public class CategorySkuServiceImpl implements CategorySkuService {
 	CategorySkuMapper egCategorySkuMapper;
 
 	@Override
-	public List<CategorySkuListVo> findCategorySkuById(Long categorySkuId, String orderBy) {
+	public List<CategorySkuListVo> findCategorySkuById(Long categorySkuId, String orderBy, String ascOrDesc) {
 		// 取出所有的内容
-		List<TbNewbeeMallGoodsInfo> entityList = egCategorySkuMapper.selectCategorySku(categorySkuId,orderBy);
+		List<TbNewbeeMallGoodsInfo> entityList = egCategorySkuMapper.selectCategorySku(categorySkuId,orderBy,ascOrDesc);
 
 		// 创建一个需要返回的vo展示集合对象
 		List<CategorySkuListVo> voList = new ArrayList<>();
