@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.CategoryInfoMapper">
+	
+	<select id="selectCategoryInfo"
+		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">
+		
+		SELECT
+			goods_id,goods_name,goods_category_id,goods_cover_img,selling_price,create_time
+		FROM 
+			tb_newbee_mall_goods_info
+		WHERE
+			goods_category_id=${goodsCategoryId}
+
+		<if test="ascOrDesc == 'desc'">
+			ORDER BY ${orderBy} DESC
+		</if>
+		<if test="ascOrDesc == 'asc'">
+			ORDER BY ${orderBy} ASC
+		</if>
+
+		LIMIT 10 OFFSET ${offsetId};
+
+	</select>
+
+	<select id="selectCategoryCount"
+		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">
+		
+		SELECT 
+			COUNT(*) AS goods_category_count ,goods_category_id
+		FROM 
+			tb_newbee_mall_goods_info
+		GROUP BY 
+			goods_category_id
+		Having 
+			goods_category_id = ${goodsCategoryId}
+
+	</select>
+	
+</mapper>

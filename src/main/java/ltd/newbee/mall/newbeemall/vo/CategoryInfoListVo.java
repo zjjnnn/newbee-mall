@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.annotation.Generated;
 
-public class CategorySkuListVo implements Serializable {
+public class CategoryInfoListVo implements Serializable {
 
 	// @TableId(value ="id",type=IdType.AUTO)
 	private Long goodsId;
@@ -14,7 +14,16 @@ public class CategorySkuListVo implements Serializable {
 	private String goodsCoverImg;
 	private Integer sellingPrice;
 	private Date createTime;
-
+//	private Long categoryCount;
+//
+//	public Long getCategoryCount() {
+//		return categoryCount;
+//	}
+//
+//	public void setCategoryCount(Long categoryCount) {
+//		this.categoryCount = categoryCount;
+//	}
+	
 	public Long getGoodsId() {
 		return goodsId;
 	}

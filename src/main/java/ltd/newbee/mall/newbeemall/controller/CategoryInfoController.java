@@ -2,7 +2,6 @@ package ltd.newbee.mall.newbeemall.controller;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,14 +10,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
 
-import ltd.newbee.mall.newbeemall.service.CategorySkuService;
+import ltd.newbee.mall.newbeemall.service.CategoryInfoService;
 
 @Controller
-public class CategorySkuController {
+public class CategoryInfoController {
 
 
 	@Resource
-	private CategorySkuService egCategorySku;
+	private CategoryInfoService egCategoryInfo;
 
 // 方法1 Postman: GET + Params
 //	@GetMapping("/CategorySku")
@@ -27,18 +26,10 @@ public class CategorySkuController {
 //		return ResultGenerator.genSuccessResult(egCategorySku.findCategorySkuById(categorySkuId));
 //	}
 
-	//带参数
-	@RequestMapping(value = "/CategorySku/{goods_category_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/CategoryInfo/{goods_category_id}", method = RequestMethod.GET)
 	@ResponseBody
-	public Result queryProduct(@PathVariable("goods_category_id") Long goodsCategoryId, String orderBy, String ascOrDesc) {
-		return ResultGenerator.genSuccessResult(egCategorySku.findCategorySkuById(goodsCategoryId,orderBy,ascOrDesc));
-	}
-	
-	//不带参数默认传所有的
-	@GetMapping("/CategorySku")
-	@ResponseBody
-	public Result queryProduct() {
-		return ResultGenerator.genSuccessResult(egCategorySku.findCategorySkuById());
+	public Result queryProduct(@PathVariable("goods_category_id") Long goodsCategoryId, String orderBy, String ascOrDesc,Long pageNo) {
+		return ResultGenerator.genSuccessResult(egCategoryInfo.findCategoryInfoById(goodsCategoryId,orderBy,ascOrDesc,pageNo));
 	}
 
 }
