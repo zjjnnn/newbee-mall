@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ltd.newbee.mall.newbeemall.dao.CountItemsByCategoryIdMapper;
 import ltd.newbee.mall.newbeemall.dao.ECGoodsCategoryMapper;
 import ltd.newbee.mall.newbeemall.entity.ECGoodsCategory;
 import ltd.newbee.mall.newbeemall.service.ItemListsService;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
+import ltd.newbee.mall.newbeemall.vo.ItemListsAndCountVO;
 
 @Controller
 public class ItemListsController {
@@ -23,6 +25,8 @@ public class ItemListsController {
 	ItemListsService itemListsService;
 	@Resource
 	ECGoodsCategoryMapper ecGoodsCategoryMapper;
+	@Resource
+	CountItemsByCategoryIdMapper countItemsByCategoryIdMapper;
 
 	@RequestMapping(value = "/itemLists/{category}/{page}/", method = RequestMethod.GET)
 	@ResponseBody
@@ -36,8 +40,11 @@ public class ItemListsController {
 			}
 		}
 		int limitIndex = (page - 1) * 10;
-		return ResultGenerator.genSuccessResult(
+		ItemListsAndCountVO itemListsAndCountVO = new ItemListsAndCountVO();
+		itemListsAndCountVO.setItemListsVOs(
 				itemListsService.findItemListsByCategoryId(categoryId, limitIndex, orderBy, ascOrDesc));
+		itemListsAndCountVO.setNumsOfItems(countItemsByCategoryIdMapper.countItemsByCategoryId(categoryId));
+		return ResultGenerator.genSuccessResult(itemListsAndCountVO);
 	}
 
 }
