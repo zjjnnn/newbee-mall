@@ -10,10 +10,11 @@
 		on t.goods_category_id=c.category_id
 		where c.category_id=#{categoryId}
 		<if test="ascOrDesc=='asc'">
-		order by ${orderBy} asc;	
+		order by ${orderBy} asc
 		</if>
 		<if test="ascOrDesc=='desc'">
-		order by ${orderBy} desc;	
+		order by ${orderBy} desc
 		</if>
+		limit #{limitIndex},10;
 	</select>
 </mapper>

@@ -25,8 +25,10 @@ public class ItemListsServiceImpl implements ItemListsService {
 	ECGoodsCategoryMapper ecGoodsCategoryMapper;
 
 	@Override
-	public List<ItemListsVO> findItemListsByCategoryId(int categoryId, String orderBy, String ascOrDesc) {
-		List<NewBeeMallGoods> goodsList = itemListsMapper.getItemListsByCategoryId(categoryId, orderBy, ascOrDesc);
+	public List<ItemListsVO> findItemListsByCategoryId(int categoryId, int limitIndex, String orderBy,
+			String ascOrDesc) {
+		List<NewBeeMallGoods> goodsList = itemListsMapper.getItemListsByCategoryId(categoryId, orderBy, ascOrDesc,
+				limitIndex);
 		List<ECGoodsCategory> categoryList = ecGoodsCategoryMapper.selectGoodsCategory();
 		List<ItemListsVO> list = new ArrayList<>();
 		for (NewBeeMallGoods goods : goodsList) {

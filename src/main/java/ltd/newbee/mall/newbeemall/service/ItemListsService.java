@@ -6,6 +6,6 @@ import ltd.newbee.mall.newbeemall.vo.ItemListsVO;
 
 public interface ItemListsService {
 
-	List<ItemListsVO> findItemListsByCategoryId(int categoryId, String orderBy, String ascOrDesc);
+	List<ItemListsVO> findItemListsByCategoryId(int categoryId, int limitIndex, String orderBy, String ascOrDesc);
 
 }

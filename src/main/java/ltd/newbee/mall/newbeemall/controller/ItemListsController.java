@@ -24,9 +24,10 @@ public class ItemListsController {
 	@Resource
 	ECGoodsCategoryMapper ecGoodsCategoryMapper;
 
-	@RequestMapping(value = "/itemLists/{category}", method = RequestMethod.GET)
+	@RequestMapping(value = "/itemLists/{category}/{page}/", method = RequestMethod.GET)
 	@ResponseBody
-	public Result queryProduct(@PathVariable("category") String categoryName, String orderBy, String ascOrDesc) {
+	public Result getItemLists(@PathVariable("category") String categoryName, @PathVariable("page") int page,
+			String orderBy, String ascOrDesc) {
 		List<ECGoodsCategory> list = ecGoodsCategoryMapper.selectGoodsCategory();
 		int categoryId = 0;
 		for (ECGoodsCategory ecGoodsCategory : list) {
@@ -34,7 +35,9 @@ public class ItemListsController {
 				categoryId = ecGoodsCategory.getCategoryId();
 			}
 		}
-		return ResultGenerator
-				.genSuccessResult(itemListsService.findItemListsByCategoryId(categoryId, orderBy, ascOrDesc));
+		int limitIndex = (page - 1) * 10;
+		return ResultGenerator.genSuccessResult(
+				itemListsService.findItemListsByCategoryId(categoryId, limitIndex, orderBy, ascOrDesc));
 	}
+
 }
