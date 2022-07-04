@@ -39,4 +39,21 @@
 
 	</select>
 	
+	
+	<select id="selectCategoryInfoParam"
+		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">
+		
+		SELECT
+			goods_id,goods_name,goods_category_id,goods_cover_img,selling_price,create_time
+		FROM 
+			tb_newbee_mall_goods_info
+		WHERE
+			goods_category_id=${goodsCategoryId}
+
+		ORDER BY ${orderBy} ${ascOrDesc}
+			
+		LIMIT ${limit} OFFSET ${offSet};
+
+	</select>
+	
 </mapper>
