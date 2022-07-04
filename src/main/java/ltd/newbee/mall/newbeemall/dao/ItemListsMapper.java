@@ -5,5 +5,5 @@ import java.util.List;
 import ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods;
 
 public interface ItemListsMapper {
-	List<NewBeeMallGoods> getItemListsByCategoryId(int categoryId);
+	List<NewBeeMallGoods> getItemListsByCategoryId(int categoryId, String orderBy, String ascOrDesc);
 }

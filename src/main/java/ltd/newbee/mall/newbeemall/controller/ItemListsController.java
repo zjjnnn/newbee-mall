@@ -26,7 +26,7 @@ public class ItemListsController {
 
 	@RequestMapping(value = "/itemLists/{category}", method = RequestMethod.GET)
 	@ResponseBody
-	public Result queryProduct(@PathVariable("category") String categoryName) {
+	public Result queryProduct(@PathVariable("category") String categoryName, String orderBy, String ascOrDesc) {
 		List<ECGoodsCategory> list = ecGoodsCategoryMapper.selectGoodsCategory();
 		int categoryId = 0;
 		for (ECGoodsCategory ecGoodsCategory : list) {
@@ -34,6 +34,7 @@ public class ItemListsController {
 				categoryId = ecGoodsCategory.getCategoryId();
 			}
 		}
-		return ResultGenerator.genSuccessResult(itemListsService.findItemListsByCategoryId(categoryId));
+		return ResultGenerator
+				.genSuccessResult(itemListsService.findItemListsByCategoryId(categoryId, orderBy, ascOrDesc));
 	}
 }

@@ -8,6 +8,12 @@
 		FROM tb_newbee_mall_goods_info as t 
 		join ec_goods_category as c
 		on t.goods_category_id=c.category_id
-		where c.category_id=#{categoryId};
+		where c.category_id=#{categoryId}
+		<if test="ascOrDesc=='asc'">
+		order by ${orderBy} asc;	
+		</if>
+		<if test="ascOrDesc=='desc'">
+		order by ${orderBy} desc;	
+		</if>
 	</select>
 </mapper>
