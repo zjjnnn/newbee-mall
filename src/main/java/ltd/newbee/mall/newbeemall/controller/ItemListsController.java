@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ltd.newbee.mall.newbeemall.dao.CountItemsByCategoryIdMapper;
 import ltd.newbee.mall.newbeemall.dao.ECGoodsCategoryMapper;
-import ltd.newbee.mall.newbeemall.entity.ECGoodsCategory;
+import ltd.newbee.mall.newbeemall.dao.ItemListsHaveNextLevelMapper;
+import ltd.newbee.mall.newbeemall.entity.GoodsCategory;
 import ltd.newbee.mall.newbeemall.service.ItemListsService;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
-import ltd.newbee.mall.newbeemall.vo.ItemListsAndCountVO;
 
 @Controller
 public class ItemListsController {
@@ -26,25 +25,22 @@ public class ItemListsController {
 	@Resource
 	ECGoodsCategoryMapper ecGoodsCategoryMapper;
 	@Resource
-	CountItemsByCategoryIdMapper countItemsByCategoryIdMapper;
+	ItemListsHaveNextLevelMapper itemListsHaveNextLevelMapper;
 
 	@RequestMapping(value = "/itemLists/{category}/{page}/", method = RequestMethod.GET)
 	@ResponseBody
 	public Result getItemLists(@PathVariable("category") String categoryName, @PathVariable("page") int page,
 			String orderBy, String ascOrDesc) {
-		List<ECGoodsCategory> list = ecGoodsCategoryMapper.selectGoodsCategory();
+		List<GoodsCategory> list = ecGoodsCategoryMapper.selectGoodsCategory();
 		int categoryId = 0;
-		for (ECGoodsCategory ecGoodsCategory : list) {
-			if (ecGoodsCategory.getCategoryName().equals(categoryName)) {
-				categoryId = ecGoodsCategory.getCategoryId();
+		int limitIndex = (page - 1) * 10;
+		for (GoodsCategory goodsCategory : list) {
+			if (goodsCategory.getCategoryName().equals(categoryName)) {
+				categoryId = goodsCategory.getCategoryId();
 			}
 		}
-		int limitIndex = (page - 1) * 10;
-		ItemListsAndCountVO itemListsAndCountVO = new ItemListsAndCountVO();
-		itemListsAndCountVO.setItemListsVOs(
+		return ResultGenerator.genSuccessResult(
 				itemListsService.findItemListsByCategoryId(categoryId, limitIndex, orderBy, ascOrDesc));
-		itemListsAndCountVO.setNumsOfItems(countItemsByCategoryIdMapper.countItemsByCategoryId(categoryId));
-		return ResultGenerator.genSuccessResult(itemListsAndCountVO);
 	}
 
 }

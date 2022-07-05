@@ -2,9 +2,9 @@ package ltd.newbee.mall.newbeemall.dao;
 
 import java.util.List;
 
-import ltd.newbee.mall.newbeemall.entity.ECGoodsCategory;
+import ltd.newbee.mall.newbeemall.entity.GoodsCategory;
 
 public interface ECGoodsCategoryMapper {
-	List<ECGoodsCategory> selectGoodsCategory();
+	List<GoodsCategory> selectGoodsCategory();
 
 }

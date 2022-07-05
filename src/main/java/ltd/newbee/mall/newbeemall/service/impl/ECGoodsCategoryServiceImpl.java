@@ -9,7 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import ltd.newbee.mall.newbeemall.dao.ECGoodsCategoryMapper;
-import ltd.newbee.mall.newbeemall.entity.ECGoodsCategory;
+import ltd.newbee.mall.newbeemall.entity.GoodsCategory;
 import ltd.newbee.mall.newbeemall.service.ECGoodsCategoryService;
 import ltd.newbee.mall.newbeemall.vo.ECGoodsCategoryListVO;
 
@@ -21,9 +21,9 @@ public class ECGoodsCategoryServiceImpl implements ECGoodsCategoryService {
 
 	@Override // 取出整个表
 	public List<ECGoodsCategoryListVO> getList() {
-		List<ECGoodsCategory> ecGoodsCategories = ecGoodsCategoryMapper.selectGoodsCategory();
+		List<GoodsCategory> ecGoodsCategories = ecGoodsCategoryMapper.selectGoodsCategory();
 		List<ECGoodsCategoryListVO> subLists = new ArrayList<>();
-		for (ECGoodsCategory ec : ecGoodsCategories) {
+		for (GoodsCategory ec : ecGoodsCategories) {
 			if (ec.getParentId() == 0) {
 				ECGoodsCategoryListVO subList = new ECGoodsCategoryListVO();
 				// ec的getter setter 添加到sublist
@@ -36,10 +36,10 @@ public class ECGoodsCategoryServiceImpl implements ECGoodsCategoryService {
 	}
 
 	// 创建子表
-	public List<ECGoodsCategoryListVO> getSubList(List<ECGoodsCategory> ecGoodsCategories,
+	public List<ECGoodsCategoryListVO> getSubList(List<GoodsCategory> ecGoodsCategories,
 			ECGoodsCategoryListVO ecGoodsCategoryListVO) {
 		List<ECGoodsCategoryListVO> subLists = new ArrayList<>();
-		for (ECGoodsCategory ec : ecGoodsCategories) {
+		for (GoodsCategory ec : ecGoodsCategories) {
 			if (ecGoodsCategoryListVO.getCategoryId().equals(ec.getParentId())) {
 				ECGoodsCategoryListVO subList = new ECGoodsCategoryListVO();
 				BeanUtils.copyProperties(ec, subList);

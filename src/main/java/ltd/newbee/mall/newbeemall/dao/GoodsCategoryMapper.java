@@ -16,6 +16,6 @@ import ltd.newbee.mall.newbeemall.entity.GoodsCategory;
 
 public interface GoodsCategoryMapper {
 
-	List<GoodsCategory> selectByLevelAndParentIdsAndNumber(@Param("parentIds") List<Long> parentIds,
+	List<GoodsCategory> selectByLevelAndParentIdsAndNumber(@Param("parentIds") List<Integer> categoryList1,
 			@Param("categoryLevel") int categoryLevel, @Param("number") int number);
 }

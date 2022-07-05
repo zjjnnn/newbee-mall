@@ -3,11 +3,9 @@
 <mapper
 	namespace="ltd.newbee.mall.newbeemall.dao.ECGoodsCategoryMapper">
 	<select id="selectGoodsCategory"
-		resultType="ltd.newbee.mall.newbeemall.entity.ECGoodsCategory">
-		SELECT a.*,c.img
-		FROM ec_goods_category as a
-		left join ec_goods_category_img as c
-		on a.category_id=c.category_id 
-		where a.active=0;
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsCategory">
+		SELECT * 
+		FROM tb_newbee_mall_goods_category
+		where is_deleted=0;
 	</select>
 </mapper>

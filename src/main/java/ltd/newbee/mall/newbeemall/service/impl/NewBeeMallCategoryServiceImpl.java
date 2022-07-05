@@ -23,26 +23,26 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
 	@Override
 	public List<NewBeeMallIndexCategoryVO> getCategoriesForIndex() {
 		// level1 parentId=0,long类型写成0l,且第一个参数parentId是List
-		List<Long> parentId = new ArrayList<Long>();
-		parentId.add(0l);
+		List<Integer> parentId = new ArrayList<Integer>();
+		parentId.add(0);
 
 		List<GoodsCategory> level1 = new ArrayList<>();
 		level1 = goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(parentId, 1, 20);
-		
-		List<Long> categoryList1 = new ArrayList<Long>();
-		
+
+		List<Integer> categoryList1 = new ArrayList<Integer>();
+
 		for (GoodsCategory gc : level1) {
 			categoryList1.add(gc.getCategoryId());
 		}
-		
+
 		// level2 parentId = level1 categoryId
 		List<GoodsCategory> level2 = new ArrayList<>();
 		level2 = goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(categoryList1, 2, 100);
-		List<Long> categoryList2 = new ArrayList<Long>();
+		List<Integer> categoryList2 = new ArrayList<Integer>();
 		for (GoodsCategory gc2 : level2) {
 			categoryList2.add(gc2.getCategoryId());
 		}
-		
+
 		// level3 parentId = level2 categoryId
 		List<GoodsCategory> level3 = new ArrayList<>();
 		level3 = goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(categoryList2, 3, 100);

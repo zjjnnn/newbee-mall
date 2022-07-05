@@ -3,10 +3,10 @@
 <mapper
 	namespace="ltd.newbee.mall.newbeemall.dao.ItemListsMapper">
 	<select id="getItemListsByCategoryId"
-		resultType="ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods">
+		resultType="ltd.newbee.mall.newbeemall.vo.ItemListsVO">
 		SELECT c.category_name,t.* 
 		FROM tb_newbee_mall_goods_info as t 
-		join ec_goods_category as c
+		join tb_newbee_mall_goods_category as c
 		on t.goods_category_id=c.category_id
 		where c.category_id=#{categoryId}
 		<if test="ascOrDesc=='asc'">

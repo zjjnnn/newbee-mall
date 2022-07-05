@@ -1,11 +1,9 @@
 package ltd.newbee.mall.newbeemall.service;
 
-import java.util.List;
-
-import ltd.newbee.mall.newbeemall.vo.ItemListsVO;
+import ltd.newbee.mall.newbeemall.vo.ItemListsAndCountVO;
 
 public interface ItemListsService {
 
-	List<ItemListsVO> findItemListsByCategoryId(int categoryId, int limitIndex, String orderBy, String ascOrDesc);
+	ItemListsAndCountVO findItemListsByCategoryId(int categoryId, int limitIndex, String orderBy, String ascOrDesc);
 
 }

@@ -2,9 +2,9 @@ package ltd.newbee.mall.newbeemall.vo;
 
 import java.util.List;
 
-import ltd.newbee.mall.newbeemall.entity.ECGoodsCategory;
+import ltd.newbee.mall.newbeemall.entity.GoodsCategory;
 
-public class ECGoodsCategoryListVO extends ECGoodsCategory {// 继承entity层导入的数据
+public class ECGoodsCategoryListVO extends GoodsCategory {// 继承entity层导入的数据
 
 	private List<ECGoodsCategoryListVO> subList;// 展示层加subList
 
