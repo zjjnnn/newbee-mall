@@ -3,14 +3,13 @@
 
 <mapper namespace="ltd.newbee.mall.newbeemall.dao.CategoryMapper">
 	<select id="selectGoodsDetail"
-		resultType="ltd.newbee.mall.newbeemall.entity.Category">
-
-		SELECT
-			c.category_id,c.category_name,c.category_parent,i.category_image
-		FROM category AS c
+		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsCategory">
+				
+		SELECT c.category_id,c.category_name,c.parent_id,i.category_image
+		FROM tb_newbee_mall_goods_category AS c
 			LEFT JOIN category_image AS i
-			ON i.category_parent = c.category_id
-		WHERE c.category_active = 0;
-
+			ON i.category_parent = c.parent_id
+		WHERE c.is_deleted = 0;
+		
 	</select>
 </mapper>

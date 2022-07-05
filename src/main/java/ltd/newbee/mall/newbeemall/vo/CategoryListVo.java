@@ -9,7 +9,7 @@ public class CategoryListVo implements Serializable {
 	private Long categoryId;
 	private String categoryName;
 	private String categoryImage;
-	private Long categoryParent;
+	private Long parentId;
 	private List<CategoryListVo> subList;
 
 	public Long getCategoryId() {
@@ -30,11 +30,11 @@ public class CategoryListVo implements Serializable {
 	public void setCategoryImage(String categoryImage) {
 		this.categoryImage = categoryImage;
 	}
-	public Long getCategoryParent() {
-		return categoryParent;
+	public Long getParentId() {
+		return parentId;
 	}
-	public void setCategoryParent(Long categoryParent) {
-		this.categoryParent = categoryParent;
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 	public List<CategoryListVo> getSubList() {
 		return subList;

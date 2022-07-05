@@ -1,8 +1,8 @@
 package ltd.newbee.mall.newbeemall.dao;
 
 import java.util.List;
-import ltd.newbee.mall.newbeemall.entity.Category;
+import ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsCategory;
 
 public interface CategoryMapper {
-	List<Category> selectGoodsDetail(Integer categoryById);
+	List<TbNewbeeMallGoodsCategory> selectGoodsDetail(Integer categoryById);
 }
