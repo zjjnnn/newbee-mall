@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="ltd.newbee.mall.newbeemall.dao.ItemListMapper">
-	
-	<select id="selectCategoryInfo"
+<mapper namespace="ltd.newbee.mall.newbeemall.dao.ItemListMapper">
+
+	<select id="selectItemList"
 		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">
-		
+
 		SELECT
 			goods_id,goods_name,goods_category_id,goods_cover_img,selling_price,create_time
-		FROM 
+		FROM
 			tb_newbee_mall_goods_info
 		WHERE
 			goods_category_id=${goodsCategoryId}
@@ -25,35 +24,84 @@
 
 	</select>
 
-	<select id="selectCategoryCount"
+	<select id="selectItemListCount"
 		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">
 		
 		SELECT 
-			COUNT(*) AS goods_category_count ,goods_category_id
+			COUNT(*) AS goods_category_count ,i.goods_category_id,c.category_name
 		FROM 
-			tb_newbee_mall_goods_info
+			tb_newbee_mall_goods_info AS i
+		LEFT JOIN 
+			tb_newbee_mall_goods_category AS c
+    	ON 
+    		i.goods_category_id = c.category_id
 		GROUP BY 
-			goods_category_id
+			i.goods_category_id
 		Having 
-			goods_category_id = ${goodsCategoryId}
+			i.goods_category_id = ${goodsCategoryId};
 
 	</select>
-	
-	
-	<select id="selectCategoryInfoParam"
+
+
+	<select id="selectItemListParam"
 		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">
-		
+
 		SELECT
 			goods_id,goods_name,goods_category_id,goods_cover_img,selling_price,create_time
-		FROM 
+		FROM
 			tb_newbee_mall_goods_info
 		WHERE
 			goods_category_id=${goodsCategoryId}
 
 		ORDER BY ${orderBy} ${ascOrDesc}
-			
+
 		LIMIT ${limit} OFFSET ${offSet};
 
 	</select>
-	
+
+	<select id="selectItemListSubParam" parameterType="Map"
+		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">
+
+		SELECT
+			goods_id,goods_name,goods_category_id,goods_cover_img,selling_price,create_time,col1,col1_name,col2,col2_name,col3,col3_name
+		FROM
+			tb_newbee_mall_goods_info
+		WHERE
+			goods_category_id
+			IN (SELECT category_id
+				FROM newbee_mall_db.tb_newbee_mall_goods_category	
+				WHERE parent_id = ${goodsCategoryId})
+
+		UNION
+
+		SELECT
+			goods_id,goods_name,goods_category_id,goods_cover_img,selling_price,create_time,col1,col1_name,col2,col2_name,col3,col3_name
+		FROM
+			tb_newbee_mall_goods_info
+		WHERE
+			goods_category_id=${goodsCategoryId}
+
+		ORDER BY ${orderBy} ${ascOrDesc}
+		LIMIT ${limit} OFFSET ${offSet};
+
+	</select>
+
+	<select id="selectItemListSubCount" parameterType="Map"
+		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">
+
+		SELECT 
+			COUNT(goods_category_id)  AS goods_category_count ,i.goods_category_id,c.category_name
+		FROM 
+			tb_newbee_mall_goods_info AS i
+		LEFT JOIN 
+			tb_newbee_mall_goods_category AS c
+    	ON 
+    		i.goods_category_id = c.category_id
+		WHERE 
+			c.parent_id = ${goodsCategoryId}
+		GROUP 
+			BY i.goods_category_id;
+
+	</select>
+
 </mapper>
