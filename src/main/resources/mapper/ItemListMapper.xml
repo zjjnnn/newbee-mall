@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper
-	namespace="ltd.newbee.mall.newbeemall.dao.CategoryInfoMapper">
+	namespace="ltd.newbee.mall.newbeemall.dao.ItemListMapper">
 	
 	<select id="selectCategoryInfo"
 		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">

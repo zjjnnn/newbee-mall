@@ -9,17 +9,17 @@ import javax.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import ltd.newbee.mall.newbeemall.dao.CategoryInfoMapper;
-import ltd.newbee.mall.newbeemall.service.CategoryInfoService;
+import ltd.newbee.mall.newbeemall.dao.ItemListMapper;
+import ltd.newbee.mall.newbeemall.service.ItemListService;
 import ltd.newbee.mall.newbeemall.util.PageQueryUtil;
 import ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo;
-import ltd.newbee.mall.newbeemall.vo.CategoryInfoListVo;
+import ltd.newbee.mall.newbeemall.vo.ItemListVo;
 
 @Service
-public class CategoryInfoServiceImpl implements CategoryInfoService {
+public class ItemListServiceImpl implements ItemListService {
 
 	@Resource
-	CategoryInfoMapper egCategoryInfoMapper;
+	ItemListMapper egCategoryInfoMapper;
 
 	@Override
 	// findCategoryInfoById
@@ -31,11 +31,11 @@ public class CategoryInfoServiceImpl implements CategoryInfoService {
 				ascOrDesc, offsetId);
 
 		// 创建一个需要返回展示集合对象voList
-		List<CategoryInfoListVo> voList = new ArrayList<>();
+		List<ItemListVo> voList = new ArrayList<>();
 		// 所有内容进行遍历塞入voList
 		for (TbNewbeeMallGoodsInfo entity : entityList) {
 			// 赋值到vo类，加入到集合中去
-			CategoryInfoListVo vo = new CategoryInfoListVo();
+			ItemListVo vo = new ItemListVo();
 			// BeanUtils.copyProperties(A,B)方法是将A中的值赋给B
 			BeanUtils.copyProperties(entity, vo);
 			// 把每项添加进voList
@@ -68,11 +68,11 @@ public class CategoryInfoServiceImpl implements CategoryInfoService {
 				ascOrDesc, limit, offSet);
 
 		// 创建一个需要返回展示集合对象voList
-		List<CategoryInfoListVo> voList = new ArrayList<>();
+		List<ItemListVo> voList = new ArrayList<>();
 		// 所有内容进行遍历塞入voList
 		for (TbNewbeeMallGoodsInfo entity : entityList) {
 			// 赋值到vo类，加入到集合中去
-			CategoryInfoListVo vo = new CategoryInfoListVo();
+			ItemListVo vo = new ItemListVo();
 			// BeanUtils.copyProperties(A,B)方法是将A中的值赋给B
 			BeanUtils.copyProperties(entity, vo);
 			// 把每项添加进voList

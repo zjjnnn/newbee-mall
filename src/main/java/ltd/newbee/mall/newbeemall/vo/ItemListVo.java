@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.annotation.Generated;
 
-public class CategoryInfoListVo implements Serializable {
+public class ItemListVo implements Serializable {
 
 	// @TableId(value ="id",type=IdType.AUTO)
 	private Long goodsId;

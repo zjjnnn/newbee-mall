@@ -16,13 +16,13 @@ import ltd.newbee.mall.newbeemall.util.PageQueryUtil;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
 
-import ltd.newbee.mall.newbeemall.service.CategoryInfoService;
+import ltd.newbee.mall.newbeemall.service.ItemListService;
 
 @Controller
-public class CategoryInfoController {
+public class ItemListController {
 
 	@Resource
-	private CategoryInfoService egCategoryInfo;
+	private ItemListService egItemList;
 
 // 方法1 Postman: GET + Params
 //	@GetMapping("/CategorySku")
@@ -31,19 +31,19 @@ public class CategoryInfoController {
 //		return ResultGenerator.genSuccessResult(egCategorySku.findCategorySkuById(categorySkuId));
 //	}
 
-	@RequestMapping(value = "/CategoryInfo/{goods_category_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/ItemList/{goods_category_id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Result queryProduct(@PathVariable("goods_category_id") Long goodsCategoryId, String orderBy,
 			String ascOrDesc, Long pageNo) {
 		return ResultGenerator
-				.genSuccessResult(egCategoryInfo.findCategoryInfoById(goodsCategoryId, orderBy, ascOrDesc, pageNo));
+				.genSuccessResult(egItemList.findCategoryInfoById(goodsCategoryId, orderBy, ascOrDesc, pageNo));
 	}
 
-	@RequestMapping(value = "/CategoryInfo/info", method = RequestMethod.POST)
+	@RequestMapping(value = "/ItemList/list", method = RequestMethod.POST)
 	@ResponseBody
 	public Result querycategory(@RequestBody Map<String, Object> params) {
 		PageQueryUtil pageParams = new PageQueryUtil(params);
-		return ResultGenerator.genSuccessResult(egCategoryInfo.findCategoryInfoParam(pageParams));
+		return ResultGenerator.genSuccessResult(egItemList.findCategoryInfoParam(pageParams));
 	}
 
 }
