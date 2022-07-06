@@ -56,5 +56,12 @@ public class ItemListController {
 		return ResultGenerator.genSuccessResult(egItemList.findItemListSub(pageParamsSub));
 	}
 	
+	//test
+	@RequestMapping(value = "/ItemList/sub", method = RequestMethod.POST)
+	@ResponseBody
+	public Result queryItemListSubtest(@RequestBody Map<String, Object> paramSub) {
+		PageQueryUtil pageParamsSub = new PageQueryUtil(paramSub);
+		return ResultGenerator.genSuccessResult(egItemList.findItemListSub(pageParamsSub));
+	}
 
 }

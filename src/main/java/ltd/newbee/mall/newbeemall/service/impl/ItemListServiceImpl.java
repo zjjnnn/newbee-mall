@@ -95,8 +95,6 @@ public class ItemListServiceImpl implements ItemListService {
 	// 增强版 可以同时查询2层和3层
 	public HashMap<String, Object> findItemListSub(PageQueryUtil pageParamsSub) {
 
-		Long goodsCategoryId = (Long) pageParamsSub.get("goodsCategoryId");
-
 		// 创建一个需要返回展示集合对象voList
 		List<TbNewbeeMallGoodsInfo> entityList = egCategoryInfoMapper.selectItemListSubParam(pageParamsSub);
 		List<ItemListVo> voList = new ArrayList<>();
@@ -115,6 +113,7 @@ public class ItemListServiceImpl implements ItemListService {
 			voCount.add(vo);
 		}
 		// 增加CountAll
+		Long goodsCategoryId = (Long) pageParamsSub.get("goodsCategoryId");
 		List<TbNewbeeMallGoodsInfo> entityCountAll = egCategoryInfoMapper.selectItemListCount(goodsCategoryId);
 		ItemListCountVo vo = new ItemListCountVo();
 		BeanUtils.copyProperties(entityCountAll.get(0), vo);
