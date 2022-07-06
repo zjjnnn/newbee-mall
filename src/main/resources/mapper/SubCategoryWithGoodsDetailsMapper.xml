@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.SubCategoryWithGoodsDetailsMapper">
+	<select id="getSubCategoryWithGoodsDetails"
+		resultType="ltd.newbee.mall.newbeemall.entity.SubCategoryWithGoodsDetails">
+		SELECT s.col_name as sub_category,s.col as details,count(s.col) as nums_of_goods
+		FROM sub_category_with_goods_details as s
+		join
+		(SELECT t.* 
+		FROM tb_newbee_mall_goods_info as t 
+		join tb_newbee_mall_goods_category as c
+		on t.goods_category_id=c.category_id
+		where c.category_id=#{categoryId} or
+		c.category_id in
+		(SELECT c2.category_id
+		FROM tb_newbee_mall_goods_category as c
+		join tb_newbee_mall_goods_category as c2
+		on c.category_id=c2.parent_id
+		where c.category_id=#{categoryId})) as i
+		on s.goods_id=i.goods_id
+		group by details
+		order by sub_category,details;
+	</select>
+</mapper>

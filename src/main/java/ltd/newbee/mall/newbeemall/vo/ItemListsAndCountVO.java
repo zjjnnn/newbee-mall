@@ -12,6 +12,8 @@ public class ItemListsAndCountVO {
 
 	private List<NextLevelCategoryNameAndCountVO> subCategoryNameAndNumsOfGoods;
 
+	private List<SubCategoryWithGoodsDetailsVo> subCategoryWithGoodsDetailsVos;
+
 	public Integer getNumsOfItems() {
 		return numsOfItems;
 	}
@@ -42,6 +44,14 @@ public class ItemListsAndCountVO {
 
 	public void setSubCategoryNameAndNumsOfGoods(List<NextLevelCategoryNameAndCountVO> subCategoryNameAndNumsOfGoods) {
 		this.subCategoryNameAndNumsOfGoods = subCategoryNameAndNumsOfGoods;
+	}
+
+	public List<SubCategoryWithGoodsDetailsVo> getSubCategoryWithGoodsDetailsVos() {
+		return subCategoryWithGoodsDetailsVos;
+	}
+
+	public void setSubCategoryWithGoodsDetailsVos(List<SubCategoryWithGoodsDetailsVo> subCategoryWithGoodsDetailsVos) {
+		this.subCategoryWithGoodsDetailsVos = subCategoryWithGoodsDetailsVos;
 	}
 
 }
