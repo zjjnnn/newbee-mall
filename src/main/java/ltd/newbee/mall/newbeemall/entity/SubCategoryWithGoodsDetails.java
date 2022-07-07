@@ -1,34 +1,43 @@
 package ltd.newbee.mall.newbeemall.entity;
 
+import javax.annotation.Generated;
+
 public class SubCategoryWithGoodsDetails {
 
-	private String subCategory;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.goods_id")
+	private Long goodsId;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.col")
+	private String col;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.col_name")
+	private String colName;
 
-	private String details;
-
-	private Integer numsOfGoods;
-
-	public String getSubCategory() {
-		return subCategory;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.goods_id")
+	public Long getGoodsId() {
+		return goodsId;
 	}
 
-	public void setSubCategory(String subCategory) {
-		this.subCategory = subCategory;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.goods_id")
+	public void setGoodsId(Long goodsId) {
+		this.goodsId = goodsId;
 	}
 
-	public String getDetails() {
-		return details;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.col")
+	public String getCol() {
+		return col;
 	}
 
-	public void setDetail(String details) {
-		this.details = details;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.col")
+	public void setCol(String col) {
+		this.col = col == null ? null : col.trim();
 	}
 
-	public Integer getNumsOfGoods() {
-		return numsOfGoods;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.col_name")
+	public String getColName() {
+		return colName;
 	}
 
-	public void setNumsOfGoods(Integer numsOfGoods) {
-		this.numsOfGoods = numsOfGoods;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.col_name")
+	public void setColName(String colName) {
+		this.colName = colName == null ? null : colName.trim();
 	}
 }

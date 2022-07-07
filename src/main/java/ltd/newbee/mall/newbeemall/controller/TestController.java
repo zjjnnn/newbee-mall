@@ -1,11 +1,14 @@
 package ltd.newbee.mall.newbeemall.controller;
 
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,12 +54,19 @@ public class TestController {
 	}
 
 	// debug用
-	@RequestMapping(value = "/test/test/{category}", method = RequestMethod.GET)
+	@RequestMapping(value = "/test/", method = RequestMethod.GET)
 	@ResponseBody
-	public Result queryProduct(@PathVariable("category") String categoryName, String orderBy) {
+	public Result queryProduct(@RequestBody HashMap<String, Object> map) {
 		// ...业务处理
-		System.out.println(orderBy);
-		return ResultGenerator.genSuccessResult(categoryName);
+		String categoryName = (String) map.get("categoryName");
+		map.remove("categoryName");
+		String orderBy = (String) map.get("orderBy");
+		map.remove("orderBy");
+		int page = (int) map.get("page");
+		map.remove("page");
+
+		System.out.println(map);
+		return ResultGenerator.genSuccessResult(map);
 	}
 
 }
