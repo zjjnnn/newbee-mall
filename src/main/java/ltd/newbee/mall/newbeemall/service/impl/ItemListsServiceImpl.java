@@ -60,10 +60,10 @@ public class ItemListsServiceImpl implements ItemListsService {
 		if (!cols.isEmpty()) {
 			goodsList = selectGoodsByCols(cols, goodsList, detailsList);
 		}
-		HashSet<Integer> parentIds = getParentIdAndSetCategoryName(categoryId, result);// 取parentid，但应先筛选完商品再取
+		HashSet<Integer> parentIds = getParentIdAndSetCategoryName(categoryId, result);// 取parentid并设置当前分类名
 
 		result.setSubCategoryNameAndNumsOfGoods(findNextLevelCategoryNameAndCountVOs(categoryId, parentIds, goodsList));
-		result.setSubCategoryWithGoodsDetailsVos(findSubCategory(categoryId, goodsList));
+		result.setSubCategoryWithGoodsDetailsVos(findSubCategory(categoryId, goodsList, cols));
 		result.setNumsOfItems(goodsList.size());
 		result.setItemListsVOs(limit(page, goodsList));
 
@@ -137,19 +137,22 @@ public class ItemListsServiceImpl implements ItemListsService {
 			goodsIdsList.add(goodsIds);
 		}
 
-		for (Long goodsId : goodsIdsList.get(0)) {// 先放入第一个colname的id
-			selectedGoodsIds.add(goodsId);
-		}
-		// 不同colname的id取交集，放入list
-		for (int i = 0; i < goodsIdsList.size() - 1; i++) {// 出问题
-			for (Long goodsId : goodsIdsList.get(i)) {
-				if (goodsIdsList.get(i + 1).contains(goodsId)) {
-					selectedGoodsIds.add(goodsId);
+		if (goodsIdsList.size() == 1) {
+			for (Long goodsId : goodsIdsList.get(0)) {// 放入该colname的id
+				selectedGoodsIds.add(goodsId);
+			}
+		} else {
+			// 不同colname的id取交集，放入list
+			for (int i = 0; i < goodsIdsList.size() - 1; i++) {
+				for (Long goodsId : goodsIdsList.get(i)) {
+					if (goodsIdsList.get(i + 1).contains(goodsId)) {
+						selectedGoodsIds.add(goodsId);
+					}
 				}
 			}
 		}
 
-		for (int i = 0; i < goodsList.size(); i++) {// 出问题了
+		for (int i = 0; i < goodsList.size(); i++) {
 			if (!selectedGoodsIds.contains(goodsList.get(i).getGoodsId())) {
 				goodsList.remove(i);
 				i--;
@@ -173,7 +176,8 @@ public class ItemListsServiceImpl implements ItemListsService {
 	}
 
 	// 抽出筛选条件和计数
-	public List<SubCategoryWithGoodsDetailsVo> findSubCategory(int categoryId, List<ItemListsVO> goodsList) {// 放入筛选后的商品列表
+	public List<SubCategoryWithGoodsDetailsVo> findSubCategory(int categoryId, List<ItemListsVO> goodsList,
+			List<String> cols) {// 放入筛选后的商品列表
 
 		List<SubCategoryWithGoodsDetailsVo> subCategory = new ArrayList<SubCategoryWithGoodsDetailsVo>();// 筛选条件及件数
 		List<SubCategoryWithGoodsDetails> detailsList = subCategoryWithGoodsDetailsMapper// 当前分类下的筛选条件总表
@@ -185,15 +189,24 @@ public class ItemListsServiceImpl implements ItemListsService {
 			goodsIds.add(goods.getGoodsId());
 		}
 
+		for (String col : cols) {
+			for (SubCategoryWithGoodsDetails detail : detailsList) {
+				if (detail.getCol().equals(col)) {
+					subCategoryNames.add(detail.getColName());// 放入当前筛选条件的colname
+				}
+			}
+		}
+
 		for (int i = 0; i < detailsList.size(); i++) {
-			if (!goodsIds.contains(detailsList.get(i).getGoodsId())) {// 商品列表里不含该商品id时删掉该id的筛选条件
+			if (!goodsIds.contains(detailsList.get(i).getGoodsId())// 商品列表里不含该商品id时删掉该id的筛选条件
+					&& !subCategoryNames.contains(detailsList.get(i).getColName())) {// 并且colname相同时需要全部展示，所以不删除
 				detailsList.remove(i);
 				i--;
 			}
 		}
 
-		for (SubCategoryWithGoodsDetails i : detailsList) {
-			subCategoryNames.add(i.getColName());// 放入筛选后的colname
+		for (SubCategoryWithGoodsDetails detail : detailsList) {
+			subCategoryNames.add(detail.getColName());// 再放入所有商品特征的colname
 		}
 
 		for (String i : subCategoryNames) {

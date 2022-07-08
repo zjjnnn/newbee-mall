@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.SelectItemsByColsMapper">
+	<select id="selectItemsByCols"
+		resultType="java.lang.Long">
+		SELECT goods_id
+		FROM sub_category_with_goods_details
+		<where>
+			goods_id in
+			(SELECT t.goods_id 
+			FROM tb_newbee_mall_goods_info as t 
+			join tb_newbee_mall_goods_category as c
+			on t.goods_category_id=c.category_id
+			where c.category_id=#{categoryId} or
+			c.category_id in
+			(SELECT c2.category_id
+			FROM tb_newbee_mall_goods_category as c
+			join tb_newbee_mall_goods_category as c2
+			on c.category_id=c2.parent_id
+			where c.category_id=#{categoryId}))	
+			and 
+            <foreach item="col" collection="cols" separator=" or " open="(" close=")"> 
+                col=#{col} 
+            </foreach>               
+        </where>
+        ;
+	</select>
+</mapper>
