@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.TodoListMapper">
+	<select id="getTodoList"
+		resultType="ltd.newbee.mall.newbeemall.entity.TodoList">
+		SELECT todo_text,month,day,finished,id
+		FROM newbee_mall_db.todo_list;
+	</select>
+	
+	<insert id="insertTodo">
+		INSERT INTO todo_list
+		(todo_text,month,day,finished)
+		VALUES
+		(#{todoText},#{month},#{day},#{finished})
+	</insert>
+	
+	<update id="changeTodoState">
+	UPDATE todo_list set finished=0 
+	WHERE id=#{id};
+	</update>
+</mapper>
