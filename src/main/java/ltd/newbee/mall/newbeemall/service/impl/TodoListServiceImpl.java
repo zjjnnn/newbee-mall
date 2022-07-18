@@ -29,10 +29,15 @@ public class TodoListServiceImpl implements TodoListService {
 	}
 
 	@Override
-	public List<TodoList> changeTodoStateAndGetTodoList(HashMap<String, Object> thisTodo) {
-		// get thisTodo id and change finished state
+	public List<TodoList> changeTodoStateAndGetTodoList(int todoId) {
+		todoListMapper.changeTodoState(todoId);
+		return todoListMapper.getTodoList();
+	}
 
-		return null;
+	@Override
+	public List<TodoList> deleteTodoAndGetTodoList(int todoId) {
+		todoListMapper.deleteTodo(todoId);
+		return todoListMapper.getTodoList();
 	}
 
 }

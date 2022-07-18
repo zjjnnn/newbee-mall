@@ -10,5 +10,7 @@ public interface TodoListService {
 
 	List<TodoList> insertTodoAndGetTodoList(HashMap<String, Object> newTodo);
 
-	List<TodoList> changeTodoStateAndGetTodoList(HashMap<String, Object> thisTodo);
+	List<TodoList> changeTodoStateAndGetTodoList(int todoId);
+
+	List<TodoList> deleteTodoAndGetTodoList(int todoId);
 }

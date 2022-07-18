@@ -11,4 +11,6 @@ public interface TodoListMapper {
 	int insertTodo(Map<String, Object> todo);
 
 	int changeTodoState(int id);
+
+	int deleteTodo(int id);
 }
