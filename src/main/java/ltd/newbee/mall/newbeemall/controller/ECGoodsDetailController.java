@@ -3,6 +3,7 @@ package ltd.newbee.mall.newbeemall.controller;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,6 +17,7 @@ public class ECGoodsDetailController {
 	@Resource
 	private ECGoodsDetailService ecGoodsDetailService;
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/ecGoodsDetail")
 	@ResponseBody
 	public Result getGoodsDetail(int configType) {
