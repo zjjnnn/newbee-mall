@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class NewBeeMallIndexCategoryVO implements Serializable {
 
+	private Integer goodsCategoryCount;
     private Long categoryId;
 
     private Byte categoryLevel;
@@ -23,6 +24,8 @@ public class NewBeeMallIndexCategoryVO implements Serializable {
     private String categoryName;
 
     private List<SecondLevelCategoryVO> secondLevelCategoryVOS;
+    
+    private Integer level3GoodsCount;
 
     public Long getCategoryId() {
         return categoryId;
@@ -55,4 +58,22 @@ public class NewBeeMallIndexCategoryVO implements Serializable {
     public void setSecondLevelCategoryVOS(List<SecondLevelCategoryVO> secondLevelCategoryVOS) {
         this.secondLevelCategoryVOS = secondLevelCategoryVOS;
     }
+
+	public Integer getLevel3GoodsCount() {
+		return level3GoodsCount;
+	}
+
+	public void setLevel3GoodsCount(Integer level3GoodsCount) {
+		this.level3GoodsCount = level3GoodsCount;
+	}
+
+	public Integer getGoodsCategoryCount() {
+		return goodsCategoryCount;
+	}
+
+	public void setGoodsCategoryCount(Integer goodsCategoryCount) {
+		this.goodsCategoryCount = goodsCategoryCount;
+	}
+    
+    
 }

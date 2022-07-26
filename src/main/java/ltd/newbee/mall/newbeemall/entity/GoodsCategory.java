@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class GoodsCategory {
+	private Integer goodsCategoryCount;
     private Long categoryId;
 
     private Byte categoryLevel;
@@ -135,4 +136,12 @@ public class GoodsCategory {
         sb.append("]");
         return sb.toString();
     }
+
+	public Integer getGoodsCategoryCount() {
+		return goodsCategoryCount;
+	}
+
+	public void setGoodsCategoryCount(Integer goodsCategoryCount) {
+		this.goodsCategoryCount = goodsCategoryCount;
+	}
 }

@@ -42,6 +42,7 @@ public class NewBeeMallIndexConfigServiceImpl implements NewBeeMallIndexConfigSe
 			goodsDetailVo.setSellingPrice(entity.getSellingPrice());
 			goodsDetailVo.setOriginalPrice(entity.getOriginalPrice());
 			goodsDetailVo.setGoodsDetailContent(entity.getGoodsDetailContent());
+			goodsDetailVo.setGoodsCoverImg(entity.getGoodsCoverImg());
 
 			String name = goodsDetailVo.getGoodsName();
 			if (name.length() > 30) {

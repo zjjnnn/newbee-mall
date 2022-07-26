@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.CategoryItemsMapper">
+
+
+	<select id="selectColName"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsFeatures">
+		SELECT col_name FROM goods_features group by col_name
+	</select>
+
+	<!-- 1 得到goodsIdList -->
+	<!-- 得到当前二级category下，小条件筛选后的goods_id -->
+	<select id="selectGoodsIdList"
+		resultType="ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods">
+		SELECT
+		info.goods_id FROM
+		tb_newbee_mall_goods_info AS info
+		JOIN
+		tb_newbee_mall_goods_category AS
+		cate ON
+		info.goods_category_id=cate.category_id
+		AND
+		(cate.parent_id=#{leve2Cate} OR
+		info.goods_category_id=#{leve2Cate})
+		RIGHT JOIN goods_features AS fea ON info.goods_id = fea.goods_id where
+		info.goods_id IS NOT NULL 
+		<if test="colList != null">
+			AND fea.col IN
+			<foreach item="item" index="index" collection="colList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+
+	<!-- 带筛选条件的商品的goods_id（已去重） -->
+<!-- 	<select id="selectGoodsIdListHavingCol"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsFeatures">
+		SELECT DISTINCT fea.goods_id FROM tb_newbee_mall_goods_info
+		AS info
+		join tb_newbee_mall_goods_category AS cate on
+		info.goods_category_id=cate.category_id
+		AND(cate.parent_id=#{leve2Cate} OR
+		info.goods_category_id=#{leve2Cate})
+		RIGHT JOIN goods_features AS fea
+		ON info.goods_id = fea.goods_id
+		WHERE info.goods_id IS NOT NULL;
+	</select> -->
+	<!-- 得到所有二级category下的商品 -->
+<select id="selectAllCategoryItems"
+		resultType="ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods">
+		SELECT
+		info.goods_id FROM
+		tb_newbee_mall_goods_info AS info
+		JOIN
+		tb_newbee_mall_goods_category AS
+		cate ON
+		info.goods_category_id=cate.category_id
+		WHERE
+		cate.parent_id=#{leve2Cate}
+		OR
+		info.goods_category_id=#{leve2Cate}
+
+	</select>
+	<!--2 得到category名以及每个category下的商品数量 -->
+	<select id="selectCategoryAndCountGoods"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsCategory">
+		SELECT COUNT(goods_category_id) AS goods_category_count
+		,i.goods_category_id,c.category_name
+		FROM tb_newbee_mall_goods_info AS
+		i
+		LEFT JOIN tb_newbee_mall_goods_category AS c
+		ON i.goods_category_id =
+		c.category_id
+		<if test="goodsIdList != null">
+			WHERE goods_id IN
+			<foreach item="item" index="index" collection="goodsIdList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		GROUP BY i.goods_category_id;
+	</select>
+
+	<!-- 3 得到小条件col以及每个小条件下的商品数量 -->
+	<select id="selectColAndCountGoodsPreCol"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsFeatures">
+		SELECT COUNT(col) as count_clo_goods,col,col_name
+		FROM goods_features
+		<if test="goodsIdList != null">
+			WHERE goods_id IN
+			<foreach item="item" index="index" collection="goodsIdList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		GROUP BY col,col_name;
+	</select>
+
+	<!--4 根据筛选后的goods_id，得到页面所需的商品信息 -->
+	<select id="selectCategoryItemInfo"
+		resultType="ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods">
+		SELECT
+		goods_id,goods_name,goods_category_id,goods_cover_img,
+		original_price,goods_intro,create_time FROM
+		tb_newbee_mall_goods_info
+		<if test="goodsIdList != null">
+			WHERE goods_id IN
+			<foreach item="item" index="index" collection="goodsIdList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		ORDER BY ${orderBy} ${sort}
+		LIMIT
+		#{start},#{num}
+	</select>
+
+	<!-- 得到所有二级category下的商品的数量 -->
+	<select id="countAllGoodses"
+		resultType="ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods">
+		SELECT
+		COUNT(info.goods_id) AS count_all_goods FROM
+		tb_newbee_mall_goods_info AS info
+		JOIN
+		tb_newbee_mall_goods_category AS
+		cate ON
+		info.goods_category_id=cate.category_id
+		WHERE
+		cate.parent_id=#{leve2Cate}
+		OR
+		info.goods_category_id=#{leve2Cate}
+	</select>
+
+</mapper>

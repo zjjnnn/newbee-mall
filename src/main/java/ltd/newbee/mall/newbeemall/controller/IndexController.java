@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,14 +48,15 @@ public class IndexController {
 	 * return ResultGenerator.genSuccessResult(newBeeMallIndexConfigService.
 	 * getConfigGoodsesForIndex(5, 5)); }
 	 */
-	
-	@GetMapping("/Goodses")
+	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("/goodses")
     @ResponseBody
     public Result getGoodses(int configType) {
 
         return ResultGenerator.genSuccessResult(newBeeMallIndexConfigService.getConfigGoodsesForIndex(configType, 5));
     }
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/categories")
     @ResponseBody
     public Result getCategories() {
