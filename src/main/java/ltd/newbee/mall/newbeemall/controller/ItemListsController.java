@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +21,8 @@ public class ItemListsController {
 	@Resource
 	ItemListsService itemListsService;
 
-	@RequestMapping(value = "/itemLists/", method = RequestMethod.GET)
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/itemList", method = RequestMethod.POST)
 	@ResponseBody
 	public Result getItemLists(@RequestBody HashMap<String, Object> map) {
 

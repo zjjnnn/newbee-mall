@@ -36,6 +36,8 @@ public class GoodsCategory {
 
 	private Integer updateUser;
 
+	private String categoryImg;
+
 	public Integer getCategoryId() {
 		return categoryId;
 	}
@@ -134,5 +136,13 @@ public class GoodsCategory {
 		sb.append(", updateUser=").append(updateUser);
 		sb.append("]");
 		return sb.toString();
+	}
+
+	public String getCategoryImg() {
+		return categoryImg;
+	}
+
+	public void setCategoryImg(String categoryImg) {
+		this.categoryImg = categoryImg;
 	}
 }

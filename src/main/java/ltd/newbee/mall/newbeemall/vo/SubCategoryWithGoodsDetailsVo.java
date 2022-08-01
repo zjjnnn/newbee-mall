@@ -6,7 +6,7 @@ public class SubCategoryWithGoodsDetailsVo {
 
 	private String name;
 
-	private Map<String, Integer> goodsDetailsList;
+	private Map<String, Integer> subDetailsList;
 
 	public String getName() {
 		return name;
@@ -16,11 +16,11 @@ public class SubCategoryWithGoodsDetailsVo {
 		this.name = name;
 	}
 
-	public Map<String, Integer> getGoodsDetailsList() {
-		return goodsDetailsList;
+	public Map<String, Integer> getSubDetailsList() {
+		return subDetailsList;
 	}
 
-	public void setGoodsDetailsList(Map<String, Integer> goodsDetailsList) {
-		this.goodsDetailsList = goodsDetailsList;
+	public void setSubDetailsList(Map<String, Integer> subDetailsList) {
+		this.subDetailsList = subDetailsList;
 	}
 }

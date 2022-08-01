@@ -45,10 +45,10 @@ public class ItemListsServiceImpl implements ItemListsService {
 		keyWordsMap.remove("orderBy");
 		String ascOrDesc = (String) keyWordsMap.get("ascOrDesc");
 		keyWordsMap.remove("ascOrDesc");
-		List<String> cols = new ArrayList<>();
-		for (String col : keyWordsMap.keySet()) { // list中存放所有的col
-			cols.add((String) keyWordsMap.get(col));
-		}
+		List<String> cols = (List<String>) keyWordsMap.get("cols");
+//		for (String col : keyWordsMap.keySet()) { // list中存放所有的col
+//			cols.add((String) keyWordsMap.get(col));
+//		}
 		// 未筛选的商品list
 		List<ItemListsVO> goodsList = itemListsHaveNextLevelMapper.getItemListsByCategoryId(categoryId, orderBy,
 				ascOrDesc);
@@ -65,6 +65,7 @@ public class ItemListsServiceImpl implements ItemListsService {
 		result.setSubCategoryNameAndNumsOfGoods(findNextLevelCategoryNameAndCountVOs(categoryId, parentIds, goodsList));
 		result.setSubCategoryWithGoodsDetailsVos(findSubCategory(categoryId, goodsList, cols));
 		result.setNumsOfItems(goodsList.size());
+		goodsList = getImgsUrl(categoryId, goodsList);
 		result.setItemListsVOs(limit(page, goodsList));
 
 		return result;
@@ -197,14 +198,22 @@ public class ItemListsServiceImpl implements ItemListsService {
 			}
 		}
 
-		for (int i = 0; i < detailsList.size(); i++) {
-			if (!goodsIds.contains(detailsList.get(i).getGoodsId())// 商品列表里不含该商品id时删掉该id的筛选条件
-					&& !subCategoryNames.contains(detailsList.get(i).getColName())) {// 并且colname相同时需要全部展示，所以不删除
-				detailsList.remove(i);
-				i--;
+		if (subCategoryNames.size() < 2) {
+			for (int i = 0; i < detailsList.size(); i++) {
+				if (!goodsIds.contains(detailsList.get(i).getGoodsId())// 商品列表里不含该商品id时删掉该id的筛选条件
+						&& !subCategoryNames.contains(detailsList.get(i).getColName())) {// 并且colname相同时需要全部展示，所以不删除
+					detailsList.remove(i);
+					i--;
+				}
+			}
+		} else {
+			for (int i = 0; i < detailsList.size(); i++) {
+				if (!goodsIds.contains(detailsList.get(i).getGoodsId())) {// 商品列表里不含该商品id时删掉该id的筛选条件
+					detailsList.remove(i);
+					i--;
+				}
 			}
 		}
-
 		for (SubCategoryWithGoodsDetails detail : detailsList) {
 			subCategoryNames.add(detail.getColName());// 再放入所有商品特征的colname
 		}
@@ -222,17 +231,39 @@ public class ItemListsServiceImpl implements ItemListsService {
 					goodsDetails.replace(j.getCol(), count);
 				}
 			}
-			newVo.setGoodsDetailsList(goodsDetails);
+			newVo.setSubDetailsList(goodsDetails);
 			subCategory.add(newVo);
 		}
 		return subCategory;
+	}
+
+	// 商品表添加颜色和商品特征图片列表
+	public List<ItemListsVO> getImgsUrl(int categoryId, List<ItemListsVO> goodsList) {
+		List<SubCategoryWithGoodsDetails> detailsList = subCategoryWithGoodsDetailsMapper
+				.getSubCategoryWithGoodsDetails(categoryId);
+		for (ItemListsVO item : goodsList) {
+			List<String> colorImgUrlList = new ArrayList<>();
+			List<String> detailsImgUrlList = new ArrayList<>();
+			for (SubCategoryWithGoodsDetails detail : detailsList) {
+				if (item.getGoodsId().equals(detail.getGoodsId())) {
+					if (detail.getColName().equals("カラー") && detail.getColImg() != null) {
+						colorImgUrlList.add(detail.getColImg());
+					} else if (!detail.getColName().equals("カラー") && detail.getColImg() != null) {
+						detailsImgUrlList.add(detail.getColImg());
+					}
+				}
+			}
+			item.setColorImgUrlList(colorImgUrlList);
+			item.setDetailsImgUrlList(detailsImgUrlList);
+		}
+		return goodsList;
 	}
 
 	// limit表示件数
 	public List<ItemListsVO> limit(int page, List<ItemListsVO> goodsList) {
 		List<ItemListsVO> resultList = new ArrayList<>();
 		int limit = (page - 1) * 10;
-		for (int i = limit; i < goodsList.size(); i++) {
+		for (int i = limit; goodsList.size() >= page * 10 ? i < limit + 10 : i < goodsList.size(); i++) {
 			resultList.add(goodsList.get(i));
 		}
 		return resultList;

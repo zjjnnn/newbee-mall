@@ -11,6 +11,8 @@ public class SubCategoryWithGoodsDetails {
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.col_name")
 	private String colName;
 
+	private String colImg;
+
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.goods_id")
 	public Long getGoodsId() {
 		return goodsId;
@@ -39,5 +41,13 @@ public class SubCategoryWithGoodsDetails {
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-07T11:42:01.1325747+09:00", comments = "Source field: sub_category_with_goods_details.col_name")
 	public void setColName(String colName) {
 		this.colName = colName == null ? null : colName.trim();
+	}
+
+	public String getColImg() {
+		return colImg;
+	}
+
+	public void setColImg(String colImg) {
+		this.colImg = colImg;
 	}
 }

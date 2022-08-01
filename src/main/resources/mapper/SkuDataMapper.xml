@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.SkuDataMapper">
+	<select id="getSkuFromGoodsId"
+		resultType="ltd.newbee.mall.newbeemall.vo.SkuDataVO">
+		SELECT * FROM sku
+		WHERE goods_id=#{goodsId} and size=#{size} and color=#{color} and stock!=0;
+	</select>
+
+	<select id="getSkuSizeList"
+		resultType="java.lang.String">
+		SELECT size FROM sku
+		WHERE goods_id=#{goodsId} and stock!=0
+		group by size;
+	</select>
+	
+	<select id="getSkuColorList"
+		resultType="ltd.newbee.mall.newbeemall.entity.SkuColor">
+		SELECT color,color_img FROM sku
+		WHERE goods_id=#{goodsId} and size=#{size} and stock!=0;
+	</select>
+</mapper>
