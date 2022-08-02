@@ -6,6 +6,9 @@ import ltd.newbee.mall.newbeemall.entity.SkuColor;
 import ltd.newbee.mall.newbeemall.vo.SkuDataVO;
 
 public interface SkuDataMapper {
+
+	SkuDataVO getSkuFirstTime(long goodsId);
+
 	SkuDataVO getSkuFromGoodsId(long goodsId, String size, String color);
 
 	List<String> getSkuSizeList(long goodsId);

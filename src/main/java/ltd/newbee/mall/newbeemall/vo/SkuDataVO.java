@@ -7,24 +7,44 @@ import ltd.newbee.mall.newbeemall.entity.SkuColor;
 
 public class SkuDataVO extends Sku {
 
-	private List<String> skuSizeList;
+	private List<String> featureIconList;
 
-	private List<SkuColor> skuColorList;
+	private List<String> imgList;
 
-	public List<String> getSkuSizeList() {
-		return skuSizeList;
+	private List<String> sizeList;
+
+	private List<SkuColor> colorList;
+
+	public List<String> getFeatureIconList() {
+		return featureIconList;
 	}
 
-	public void setSkuSizeList(List<String> skuSizeList) {
-		this.skuSizeList = skuSizeList;
+	public void setFeatureIconList(List<String> featureIconList) {
+		this.featureIconList = featureIconList;
 	}
 
-	public List<SkuColor> getSkuColorList() {
-		return skuColorList;
+	public List<String> getImgList() {
+		return imgList;
 	}
 
-	public void setSkuColorList(List<SkuColor> skuColorList) {
-		this.skuColorList = skuColorList;
+	public void setImgList(List<String> imgList) {
+		this.imgList = imgList;
+	}
+
+	public List<String> getSizeList() {
+		return sizeList;
+	}
+
+	public void setSizeList(List<String> sizeList) {
+		this.sizeList = sizeList;
+	}
+
+	public List<SkuColor> getColorList() {
+		return colorList;
+	}
+
+	public void setColorList(List<SkuColor> colorList) {
+		this.colorList = colorList;
 	}
 
 }
