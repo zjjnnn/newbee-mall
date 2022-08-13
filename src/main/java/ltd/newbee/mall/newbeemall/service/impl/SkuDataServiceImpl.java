@@ -29,7 +29,6 @@ public class SkuDataServiceImpl implements SkuDataService {
 			resultSkuDataVO = skuDataMapper.getSkuFirstTime(goodsId);
 			colorList = skuDataMapper.getSkuColorList(goodsId, resultSkuDataVO.getSize());
 		} else {
-			// 取该size的颜色列表
 			colorList = skuDataMapper.getSkuColorList(goodsId, size);
 			String resultColor = colorList.get(0).getColor();
 
@@ -40,11 +39,16 @@ public class SkuDataServiceImpl implements SkuDataService {
 			}
 			resultSkuDataVO = skuDataMapper.getSkuFromGoodsId(goodsId, size, resultColor);
 		}
-
-		JSONObject jsonImg = JSONObject.parseObject(resultSkuDataVO.getImg());
-		List<String> imgList = JSON.parseArray(jsonImg.getJSONArray("img").toJSONString(), String.class);
-		JSONObject jsonIcon = JSONObject.parseObject(resultSkuDataVO.getFeatureIcon());
-		List<String> iconList = JSON.parseArray(jsonIcon.getJSONArray("featureIcon").toJSONString(), String.class);
+		List<String> imgList = new ArrayList<>();
+		List<String> iconList = new ArrayList<>();
+		if (resultSkuDataVO.getImg() != null) {
+			JSONObject jsonImg = JSONObject.parseObject(resultSkuDataVO.getImg());
+			imgList = JSON.parseArray(jsonImg.getJSONArray("img").toJSONString(), String.class);
+		}
+		if (resultSkuDataVO.getFeatureIcon() != null) {
+			JSONObject jsonIcon = JSONObject.parseObject(resultSkuDataVO.getFeatureIcon());
+			iconList = JSON.parseArray(jsonIcon.getJSONArray("featureIcon").toJSONString(), String.class);
+		}
 
 		resultSkuDataVO.setImgList(imgList);
 		resultSkuDataVO.setFeatureIconList(iconList);

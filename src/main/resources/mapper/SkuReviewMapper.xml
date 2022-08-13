@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.SkuReviewMapper">
+	<select id="getReviewsDataByGoodsId"
+		resultType="ltd.newbee.mall.newbeemall.entity.CReview">		
+		SELECT * FROM c_review
+		WHERE goods_id=#{goodsId}
+		ORDER BY likes desc;
+	</select>
+</mapper>
