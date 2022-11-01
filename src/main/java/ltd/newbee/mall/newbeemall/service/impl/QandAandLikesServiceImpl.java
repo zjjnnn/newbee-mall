@@ -40,6 +40,16 @@ public class QandAandLikesServiceImpl implements QandAandLikesService {
 		question.put("qDate", ft.format(questionDate));
 		qandAandLikesMapper.insertNewQuestion(question);
 		long goodsId = ((Integer) question.get("goodsId")).longValue();
-		return getQandAandLikes(goodsId, "likes", 1);
+		return getQandAandLikes(goodsId, (String) question.get("orderBy"), 1);
+	}
+
+	@Override
+	public List<Qa> insertLike(long goodsId, long questionId, String orderBy) {
+		long userId = (long) (Math.random() * (9999999 - 1000000) + 1000000);
+		Date questionDate = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+		String date = ft.format(questionDate);
+		qandAandLikesMapper.insertLike(userId, questionId, date);
+		return getQandAandLikes(goodsId, orderBy, 1);
 	}
 }

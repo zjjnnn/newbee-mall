@@ -9,4 +9,6 @@ public interface QandAandLikesService {
 	List<Qa> getQandAandLikes(Long goodsId, String orderBy, int pageNum);
 
 	List<Qa> insertNewQuestion(HashMap<String, Object> question);
+
+	List<Qa> insertLike(long goodsId, long questionId, String orderBy);
 }

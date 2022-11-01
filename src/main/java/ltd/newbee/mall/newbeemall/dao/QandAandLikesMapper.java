@@ -10,4 +10,5 @@ public interface QandAandLikesMapper {
 
 	int insertNewQuestion(Map<String, Object> question);
 
+	int insertLike(long userId, long questionId, String date);
 }

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,5 +35,13 @@ public class QandAandLikesController {
 	@ResponseBody
 	public Result insertNewQuestion(@RequestBody HashMap<String, Object> question) {
 		return ResultGenerator.genSuccessResult(qandAandLikesService.insertNewQuestion(question));
+	}
+
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/QandA/{goodsId}/{questionId}/{orderBy}", method = RequestMethod.POST)
+	@ResponseBody
+	public Result insertLike(@PathVariable("goodsId") long goodsId, @PathVariable("questionId") long questionId,
+			@PathVariable("orderBy") String orderBy) {
+		return ResultGenerator.genSuccessResult(qandAandLikesService.insertLike(goodsId, questionId, orderBy));
 	}
 }

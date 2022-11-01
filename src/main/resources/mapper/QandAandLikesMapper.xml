@@ -18,4 +18,11 @@
 		VALUES
 		(#{question},#{qDate},#{status},#{userId},#{goodsId});
 	</insert>
+	
+	<insert id="insertLike">
+		INSERT INTO qa_thumbs
+		(question_id,user_id,date)
+		VALUES
+		(#{questionId},#{userId},#{date});
+	</insert>
 </mapper>
