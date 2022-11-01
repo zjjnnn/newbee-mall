@@ -13,7 +13,9 @@
       	<property name="trimStrings" value="true" />
     	</javaModelGenerator>
     	
+
 		<table schema="newbee_mall_db" tableName="c_review">
+
 			<property name="useActualColumnNames" value="false" />
 		</table>
 	</context>

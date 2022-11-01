@@ -16,13 +16,16 @@ import java.util.List;
  */
 public class NewBeeMallIndexCategoryVO implements Serializable {
 
+
 	private Integer categoryId;
 
 	private Byte categoryLevel;
 
 	private String categoryName;
 
+
 	private List<SecondLevelCategoryVO> secondLevelCategoryVOS;
+
 
 	public Integer getCategoryId() {
 		return categoryId;
@@ -52,7 +55,9 @@ public class NewBeeMallIndexCategoryVO implements Serializable {
 		return secondLevelCategoryVOS;
 	}
 
+
 	public void setSecondLevelCategoryVOS(List<SecondLevelCategoryVO> secondLevelCategoryVOS) {
 		this.secondLevelCategoryVOS = secondLevelCategoryVOS;
 	}
+
 }

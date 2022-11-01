@@ -14,9 +14,11 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class GoodsCategory {
+
 	private Integer categoryId;
 
 	private Byte categoryLevel;
+
 
 	private Integer parentId;
 
@@ -118,6 +120,7 @@ public class GoodsCategory {
 		this.updateUser = updateUser;
 	}
 
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -144,5 +147,6 @@ public class GoodsCategory {
 
 	public void setCategoryImg(String categoryImg) {
 		this.categoryImg = categoryImg;
+
 	}
 }
